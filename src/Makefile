@@ -16,6 +16,10 @@ all: init
 init:
 	${MKDIR} -p ${BUILD_DIR}
 
+install:
+	ln -s `pwd`/${BUILD_DIR}/libgps.a /usr/lib/libgps.a
+	ln -s `pwd`/${BUILD_DIR}/gps.h /usr/include/gps.h
+
 clean:
 	${RM} ${BUILD_DIR}/gps.o
 	${RM} ${BUILD_DIR}/libgps.a
