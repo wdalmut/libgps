@@ -12,6 +12,13 @@ all: init
 	${CC} ${CFLAGS} -I. -c -o ${BUILD_DIR}/gps.o x86_64/gps.c
 	${AR} -rsc ${BUILD_DIR}/libgps.a ${BUILD_DIR}/gps.o
 	${CP} *.h ${BUILD_DIR}
+	@echo
+	@echo
+	@echo RUN TESTS SHOULD BE A GOOD IDEA...
+	@echo
+	@echo make tests
+	@echo
+	@echo
 
 init:
 	${MKDIR} -p ${BUILD_DIR}
