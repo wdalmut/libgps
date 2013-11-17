@@ -4,12 +4,12 @@ CP=/bin/cp
 MKDIR=/bin/mkdir
 RM=/bin/rm
 
-CFLAGS=-g3 -Wall
+CFLAGS=-g3 -Wall -lm
 
 BUILD_DIR=../build
 
 all: init
-	${CC} ${CFLAGS} -I. -c -o ${BUILD_DIR}/gps.o x86_64/gps.c
+	${CC} ${CFLAGS} -I. -c -o ${BUILD_DIR}/gps.o gps.c
 	${AR} -rsc ${BUILD_DIR}/libgps.a ${BUILD_DIR}/gps.o
 	${CP} *.h ${BUILD_DIR}
 	@echo
@@ -28,6 +28,5 @@ install:
 	ln -s `pwd`/${BUILD_DIR}/gps.h /usr/include/gps.h
 
 clean:
-	${RM} ${BUILD_DIR}/gps.o
-	${RM} ${BUILD_DIR}/libgps.a
+	${RM} ${BUILD_DIR}/*
 

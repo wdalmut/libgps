@@ -6,11 +6,11 @@
 #include <inttypes.h>
 
 struct gpgga {
-    // Latitude eg: 4124.8963
+    // Latitude eg: 4124.8963 (XXYY.ZZKK.. DEG, MIN, SEC.SS)
     double latitude;
     // Latitude eg: N
     char lat;
-    // Longitude eg: 8151.6838
+    // Longitude eg: 08151.6838 (XXXYY.ZZKK.. DEG, MIN, SEC.SS)
     double longitude;
     // Longitude eg: W
     char lon;
