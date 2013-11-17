@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <check.h>
 
+#include "helpers.h"
 #include "nmea.h"
 
 
@@ -13,13 +14,13 @@ START_TEST (test_nmea_gpgga_parse)
     char buf[48];
 
     snprintf(buf, sizeof(buf), "The readed latitude is: %f", loc->latitude);
-    ck_assert_msg(loc->latitude == 3334.2313457, buf);
+    ck_assert_double_eq(3334.2313457, loc->latitude, buf);
 
     snprintf(buf, sizeof(buf), "The readed lat is: %c", loc->lat);
     ck_assert_msg(loc->lat == 'N', buf);
 
     snprintf(buf, sizeof(buf), "The readed longitude is: %f", loc->longitude);
-    ck_assert_msg(loc->longitude == 11211.057694, buf);
+    ck_assert_double_eq(11211.057694, loc->longitude, buf);
 
     snprintf(buf, sizeof(buf), "The readed lon is: %c", loc->lon);
     ck_assert_msg(loc->lon == 'W', buf);
@@ -31,7 +32,7 @@ START_TEST (test_nmea_gpgga_parse)
     ck_assert_msg(loc->satellites == 4, buf);
 
     snprintf(buf, sizeof(buf), "The readed altitude is: %lf", loc->altitude);
-    ck_assert_msg(loc->altitude == 354.682, buf);
+    ck_assert_double_eq(354.682, loc->altitude, buf);
 }
 END_TEST
 
@@ -43,19 +44,19 @@ START_TEST (test_nmea_gprmc_parse)
     char buf[48];
 
     snprintf(buf, sizeof(buf), "The readed latitude is: %f", loc->latitude);
-    ck_assert_msg(loc->latitude == 3751.65, buf);
+    ck_assert_double_eq(3751.65, loc->latitude, buf);
 
     snprintf(buf, sizeof(buf), "The readed lat is: %c", loc->lat);
     ck_assert_msg(loc->lat == 'S', buf);
 
     snprintf(buf, sizeof(buf), "The readed longitude is: %f", loc->longitude);
-    ck_assert_msg(loc->longitude == 14507.36, buf);
+    ck_assert_double_eq(14507.36, loc->longitude, buf);
 
     snprintf(buf, sizeof(buf), "The readed lon is: %c", loc->lon);
     ck_assert_msg(loc->lon == 'E', buf);
 
     snprintf(buf, sizeof(buf), "The readed speed is: %lf", loc->speed);
-    ck_assert_msg(loc->speed == 0.05, buf);
+    ck_assert_double_eq(0.05, loc->speed, buf);
 
     snprintf(buf, sizeof(buf), "The readed course/angle is: %lf", loc->course);
     ck_assert_msg(loc->course == 360, buf);

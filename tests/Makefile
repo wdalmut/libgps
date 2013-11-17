@@ -11,7 +11,7 @@ BUILD_PATH=../build
 all:
 	${CC} ${CFLAGS} \
 		-o ${BUILD_PATH}/gps_tests all_tests.c ../src/nmea.c nmea_test.c \
-		../src/serial.c serial_test.c ../src/gps.c gps_test.c \
+		../src/serial.c serial_test.c ../src/gps.c gps_test.c helpers.c  \
 		-I../src/ -lm \
 		`pkg-config --cflags --libs check`
 	 @echo
