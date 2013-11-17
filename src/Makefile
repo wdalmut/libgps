@@ -10,7 +10,9 @@ BUILD_DIR=../build
 
 all: init
 	${CC} ${CFLAGS} -I. -c -o ${BUILD_DIR}/gps.o gps.c
-	${AR} -rsc ${BUILD_DIR}/libgps.a ${BUILD_DIR}/gps.o
+	${CC} ${CFLAGS} -I. -c -o ${BUILD_DIR}/serial.o serial.c
+	${CC} ${CFLAGS} -I. -c -o ${BUILD_DIR}/nmea.o nmea.c
+	${AR} -rsc ${BUILD_DIR}/libgps.a ${BUILD_DIR}/gps.o ${BUILD_DIR}/serial.o ${BUILD_DIR}/nmea.o
 	${CP} *.h ${BUILD_DIR}
 	@echo
 	@echo

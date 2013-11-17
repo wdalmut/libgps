@@ -8,6 +8,9 @@ MAKE=/usr/bin/make
 all:
 	$(MAKE) -C src all
 
+install:
+	$(MAKE) -C src install
+
 tests: all
 	$(MAKE) -C tests all
 
