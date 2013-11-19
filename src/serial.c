@@ -35,37 +35,42 @@ void serial_config(void)
 void serial_println(const char *line, int len)
 {
     if (uart0_filestream != -1) {
-        int count = write(uart0_filestream, line, len);
-        if (count < 0) {
-            //TODO: handle errors...
-        }
+        char *cpstr = (char *)malloc((len+1) * sizeof(char));
+        strcpy(cpstr, line);
+        cpstr[len-1] = '\r';
+        cpstr[len] = '\n';
 
-        count = write(uart0_filestream, "\n", 1);
+        int count = write(uart0_filestream, cpstr, len+1);
         if (count < 0) {
             //TODO: handle errors...
         }
+        free(cpstr);
     }
 }
 
+// Read a line from UART.
+// Return a 0 len string in case of problems with UART
 void serial_readln(char *buffer, int len)
 {
+    char c;
     char *b = buffer;
     int rx_length = -1;
-    while(rx_length != 0) {
-        rx_length = read(uart0_filestream, (void*)b, len);
+    while(1) {
+        rx_length = read(uart0_filestream, (void*)(&c), 1);
 
         if (rx_length < 0) {
-            //TODO: error handling...
+            // Problems
+            buffer[0] = '\0';
+            break;
         } else if (rx_length == 0) {
-            //Nothing to receive
+            //wait for messages
+            sleep(1);
         } else {
-            if (strchr(b, '\n') != NULL) {
-                b[rx_length] = '\0';
-                rx_length = 0;
-            } else {
-                b += rx_length;
-                len -= rx_length;
+            if (c == '\n') {
+                *b++ = '\0';
+                break;
             }
+            *b++ = c;
         }
     }
 }
