@@ -133,11 +133,12 @@ uint8_t nmea_valid_checksum(const char *message) {
 
     char p;
     uint8_t sum = 0;
+    ++message;
     while ((p = *message++) != '*') {
         sum ^= p;
     }
 
-    if (sum == checksum) {
+    if (sum != checksum) {
         return NMEA_CHECKSUM_ERR;
     }
 

@@ -96,11 +96,11 @@ END_TEST
 
 START_TEST (test_nmea_checksum_check)
 {
-    uint8_t err = nmea_valid_checksum("$GPRMC,081836,A,3751.65,S,14507.36,E,000.0,360.0,130998,011.3,E*62");
-    ck_assert_msg(err != _EMPTY, "Checksum computing fail");
+    uint8_t err = nmea_valid_checksum("$GPRMC,174407.000,A,4504.2577,N,00738.7661,E,1.75,342.80,231113,,,A*6A");
+    ck_assert_msg(err != _EMPTY, "Valid checksum computing fail");
 
-    err = nmea_valid_checksum("$GPRMC,081836,A,3751.65,S,14507.36,E,000.0,360.0,130998,011.3,E*63");
-    ck_assert_msg(err != NMEA_CHECKSUM_ERR, "Checksum computing fail");
+    err = nmea_valid_checksum("$GPRMC,174407.000,A,4504.2577,N,00738.7661,E,1.75,342.80,231113,,,A*6B");
+    ck_assert_msg(err != NMEA_CHECKSUM_ERR, "Invalid checksum computing fail");
 }
 END_TEST
 
