@@ -15,11 +15,11 @@ START_TEST (test_gps_convert_deg_to_dec)
 
     char buf[48];
 
-    snprintf(buf, sizeof(buf), "The readed latitude is: %f", lat);
-    ck_assert_double_eq(33.573093, lat, buf);
+    snprintf(buf, sizeof(buf), "The readed latitude is: %lf, want %lf", lat, 33.570522);
+    ck_assert_double_eq(33.570522, lat, buf);
 
-    snprintf(buf, sizeof(buf), "The readed longitude is: %f", lon);
-    ck_assert_double_eq(112.184936, lon, buf);
+    snprintf(buf, sizeof(buf), "The readed longitude is: %lf, want %lf", lon, 112.184295);
+    ck_assert_double_eq(112.184295, lon, buf);
 }
 END_TEST
 

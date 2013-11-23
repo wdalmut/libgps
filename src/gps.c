@@ -72,7 +72,7 @@ void gps_convert_deg_to_dec(double *latitude, char ns,  double *longitude, char 
 double gps_deg_dec(double deg_point)
 {
     double ddeg;
-    double sec = modf(deg_point, &ddeg)*100;
+    double sec = modf(deg_point, &ddeg)*60;
     int deg = (int)(ddeg/100);
     int min = (int)(deg_point-(deg*100));
 
