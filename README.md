@@ -72,12 +72,32 @@ Run it
 ```shell
 $ ./position_logger
 ```
+You will see your data directly in console:
 
-You will see your data directly in console. You can rotate the output to
+```shell
+45.071060 7.646363
+45.071082 7.646385
+45.071078 7.646387
+45.071060 7.646373
+45.071048 7.646358
+45.071052 7.646372
+45.071057 7.646392
+45.071062 7.646397
+45.071062 7.646383
+45.071073 7.646395
+45.071082 7.646403
+45.071082 7.646403
+45.071080 7.646395
+45.071083 7.646392
+45.071088 7.646393
+```
+
+You can rotate the output to
 files
 
 ```shell
 $ ./position_logger >> position.log
+``
 ```
 
 That's all...
