@@ -63,7 +63,7 @@ extern void gps_off(void) {
 void gps_convert_deg_to_dec(double *latitude, char ns,  double *longitude, char we)
 {
     double lat = (ns == 'N') ? *latitude : -1 * (*latitude);
-    double lon = (ns == 'E') ? *longitude : -1 * (*longitude);
+    double lon = (we == 'E') ? *longitude : -1 * (*longitude);
 
     *latitude = gps_deg_dec(lat);
     *longitude = gps_deg_dec(lon);

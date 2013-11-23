@@ -11,7 +11,7 @@ START_TEST (test_gps_convert_deg_to_dec)
     double lat = 3334.2313457;
     double lon = 11211.0576940;
 
-    gps_convert_deg_to_dec(&lat, 'N', &lon, 'W');
+    gps_convert_deg_to_dec(&lat, 'N', &lon, 'E');
 
     char buf[48];
 
@@ -19,7 +19,7 @@ START_TEST (test_gps_convert_deg_to_dec)
     ck_assert_double_eq(33.573093, lat, buf);
 
     snprintf(buf, sizeof(buf), "The readed longitude is: %f", lon);
-    ck_assert_double_eq(-112.184936, lon, buf);
+    ck_assert_double_eq(112.184936, lon, buf);
 }
 END_TEST
 
