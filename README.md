@@ -97,7 +97,6 @@ files
 
 ```shell
 $ ./position_logger >> position.log
-``
 ```
 
 That's all...
