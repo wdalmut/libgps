@@ -36,6 +36,36 @@ START_TEST (test_nmea_gpgga_parse)
 }
 END_TEST
 
+START_TEST (test_invalid_nmea_gpgga_parse)
+{
+    gpgga_t *loc = (gpgga_t *)malloc(sizeof(gpgga_t));
+    nmea_parse_gpgga("$GPGGA,080919.091,,,,,0,0,,,M,,M,,*49", loc);
+
+    char buf[48];
+
+    snprintf(buf, sizeof(buf), "The readed latitude is: %f", loc->latitude);
+    ck_assert_double_eq(0, loc->latitude, buf);
+
+    snprintf(buf, sizeof(buf), "The readed lat is: %c", loc->lat);
+    ck_assert_msg(loc->lat == '\0', buf);
+
+    snprintf(buf, sizeof(buf), "The readed longitude is: %f", loc->longitude);
+    ck_assert_double_eq(0, loc->longitude, buf);
+
+    snprintf(buf, sizeof(buf), "The readed lon is: %c", loc->lon);
+    ck_assert_msg(loc->lon == '\0', buf);
+
+    snprintf(buf, sizeof(buf), "The readed quality is: %d", loc->quality);
+    ck_assert_msg(loc->quality == 0, buf);
+
+    snprintf(buf, sizeof(buf), "The readed satellites is: %d", loc->satellites);
+    ck_assert_msg(loc->satellites == 0, buf);
+
+    snprintf(buf, sizeof(buf), "The readed altitude is: %lf", loc->altitude);
+    ck_assert_double_eq(0, loc->altitude, buf);
+}
+END_TEST
+
 START_TEST (test_nmea_gprmc_parse)
 {
     gprmc_t *loc = (gprmc_t *)malloc(sizeof(gprmc_t));
@@ -68,6 +98,7 @@ Suite *nmea_suite(void)
     Suite *s = suite_create("NMEA");
     TCase *tc_core = tcase_create("Core");
     tcase_add_test(tc_core, test_nmea_gpgga_parse);
+    tcase_add_test(tc_core, test_invalid_nmea_gpgga_parse);
     tcase_add_test(tc_core, test_nmea_gprmc_parse);
     suite_add_tcase(s, tc_core);
 
