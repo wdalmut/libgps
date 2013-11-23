@@ -34,6 +34,8 @@ extern void gps_location(loc_t *coord) {
             case NMEA_GPGGA:
                 nmea_parse_gpgga(buffer, &gpgga);
 
+                gps_convert_deg_to_dec(&(gpgga.latitude), gpgga.lat, &(gpgga.longitude), gpgga.lon);
+
                 coord->latitude = gpgga.latitude;
                 coord->longitude = gpgga.longitude;
                 coord->altitude = gpgga.altitude;
@@ -54,6 +56,7 @@ extern void gps_location(loc_t *coord) {
 
 extern void gps_off(void) {
     //Write off
+    serial_close();
 }
 
 // Convert lat e lon to decimals (from deg)
