@@ -20,9 +20,6 @@ extern void gps_on(void) {
 
 // Compute the GPS location using decimal scale
 extern void gps_location(loc_t *coord) {
-    /*coord->latitude  = 43.941866f;
-    coord->longitude = 7.828637f;*/
-
     uint8_t status = _EMPTY;
     while(status != _COMPLETED) {
         gpgga_t gpgga;
