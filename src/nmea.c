@@ -102,3 +102,16 @@ void nmea_parse_gprmc(char *nmea, gprmc_t *loc)
     loc->course = atof(p);
 }
 
+uint8_t nmea_get_message_type(const char *message)
+{
+    if (strstr(message, NMEA_GPGGA_STR) != NULL) {
+        return NMEA_GPGGA;
+    }
+
+    if (strstr(message, NMEA_GPRMC_STR) != NULL) {
+        return NMEA_GPRMC;
+    }
+
+    return NMEA_UNKNOWN;
+}
+

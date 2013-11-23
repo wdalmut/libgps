@@ -8,7 +8,8 @@
 #include "serial.h"
 
 extern void gps_init(void) {
-    /*serial_init();*/
+    serial_init();
+    serial_config();
 
     //Write commands
 }
@@ -19,12 +20,36 @@ extern void gps_on(void) {
 
 // Compute the GPS location using decimal scale
 extern void gps_location(loc_t *coord) {
-    coord->latitude  = 43.941866f;
-    coord->longitude = 7.828637f;
+    /*coord->latitude  = 43.941866f;
+    coord->longitude = 7.828637f;*/
 
-    //Write command
+    uint8_t status = _EMPTY;
+    while(status != _COMPLETED) {
+        gpgga_t gpgga;
+        gprmc_t gprmc;
+        char buffer[256];
 
-    //Read nmea
+        serial_readln(buffer, 256);
+        switch (nmea_get_message_type(buffer)) {
+            case NMEA_GPGGA:
+                nmea_parse_gpgga(buffer, &gpgga);
+
+                coord->latitude = gpgga.latitude;
+                coord->longitude = gpgga.longitude;
+                coord->altitude = gpgga.altitude;
+
+                status |= NMEA_GPGGA;
+                break;
+            case NMEA_GPRMC:
+                nmea_parse_gprmc(buffer, &gprmc);
+
+                coord->speed = gprmc.speed;
+                coord->course = gprmc.course;
+
+                status |= NMEA_GPRMC;
+                break;
+        }
+    }
 }
 
 extern void gps_off(void) {
