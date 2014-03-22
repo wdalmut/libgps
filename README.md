@@ -1,6 +1,6 @@
-# GPS golang library
+# GPS library
 
-The GPS library (mixed C and Go)
+The GPS library
 
 ## Build it
 
