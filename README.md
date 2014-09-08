@@ -31,7 +31,7 @@ The library mainly exposes few methods
 This project abstracts all datas and replies in:
 
  * Decimal Degrees for latitudes and logitudes (46.235325, 7.12521)
-   * Not degrees (42° 53' 23.25'' North - 4° 22' 46.3'' East)
+   * Not degrees (42° 53' 23.25'' North - 4° 22' 46.3'' West)
  * Knots for speeds
  * Degrees for angles (course)
  * Meters for altitude
